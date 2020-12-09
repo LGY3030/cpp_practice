@@ -14,6 +14,7 @@ void pop_end(Node*&);
 void pop_index(int, Node*&);
 void pop_num(int, Node*&);
 void search(int, Node*&);
+void reverse(Node*&);
 void print_list(Node*);
  
 int main(){
@@ -22,7 +23,7 @@ int main(){
 	push_front(10,head);
 	push_end(2,head);
 	push_end(15,head);
-	search(1,head);
+	reverse(head);
 	print_list(head);
 } 
 
@@ -136,6 +137,25 @@ void search(int num, Node*& head){
 			tmp = tmp->next;
 		}
 	}
+}
+
+void reverse(Node*& head){
+	if(head == NULL) cout<<"The list id empty"<<endl;
+	else if(head->next == NULL) return;
+	else{
+		Node * pre = NULL;
+		Node * cur = head;
+		Node * pos = head->next;
+		while(pos!=NULL){
+			cur->next = pre;
+			pre = cur;
+			cur = pos;
+			pos = pos->next;
+		}
+		cur->next = pre;
+		head = cur;
+	}
+	
 }
 
 void print_list(Node * head){
