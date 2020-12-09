@@ -104,6 +104,9 @@ int main(){
 	for(itr=vec2.begin(); itr<vec2.end(); itr++) cout<<*itr<<" "; 
 	cout<<endl;
 	
+	for(auto i:vec4) cout<<i<<" ";
+	cout<<endl;
+	
 	vec4.clear();
 	vector<int>().swap(vec4); // 宣告一個空vector，將其與要刪除的vector進行swap交換，就能做記憶體刪除
 	
@@ -121,6 +124,14 @@ int main(){
 	    for(int j=0; j<2; j++)
 	        (vec.at(i)).at(j) = arr1[i][j];    // vec.at(i).at(j)同vec[i][j]	
 	//因為">>"是關鍵operator，因此宣告時兩個">"之間，一定要有空格!
+	
+	
+	for(auto i:vec){
+		for(auto j:i){
+			cout<<j<<" ";
+		}
+	}
+	cout<<endl;
 	
 	
 	//用push_back
