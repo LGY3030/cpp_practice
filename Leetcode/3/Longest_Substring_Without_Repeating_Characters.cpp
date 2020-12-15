@@ -1,3 +1,27 @@
+//Solution 1, Time limit exceeded
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int res = 0;
+        int result = 0;
+        for(int i=0; i<s.length()-1; i++){
+            vector<int> vec(256, -2);
+            res = 0;
+            for(int j=i; j<s.length(); j++){
+                if(vec.at(s[j])>-1){
+                    break;
+                }
+                vec.at(s[j]) = i;
+                res++;
+            }
+            result = max(res, result);
+        }
+        return max(1, result);
+    }
+};
+
+//Solution 2 
 class Solution {
 	public:
 	    int lengthOfLongestSubstring(string s) {
@@ -23,4 +47,22 @@ class Solution {
 	        }
 	        return res;
 	    }
+};
+
+//Solution 3
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> vec(256,-2);
+        int start = -1;
+        int res = 0;
+        for(int i=0; i<s.length(); i++){
+            if(vec.at(s[i]) > start){
+                start = vec.at(s[i]);
+            }
+            vec.at(s[i]) = i;
+            res = max(res, i-start);
+        }
+        return res;
+    }
 };

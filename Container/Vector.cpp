@@ -108,7 +108,7 @@ int main(){
 	cout<<endl;
 	
 	vec4.clear();
-	vector<int>().swap(vec4); // 宣告一個空vector，將其與要刪除的vector進行swap交換，就能做記憶體刪除
+	vector<int>{}.swap(vec4); // 宣告一個空vector，將其與要刪除的vector進行swap交換，就能做記憶體刪除
 	
 	//push_back()在發現capacity不夠時，會將該vector記憶體做雙倍大小重新配置，因此若重新分配太多次後，會導致記憶體過度浪費與過多不必要的記憶體重新配置，因此若能知道要用多少的記憶體，或最多會用多少時，還是建議直接先使用reserve(n)進行記憶體配置
 	//因為operator[]不會進行邊界檢查，若程式過於龐大，出錯時會很難找出錯誤，建議還是使用at(i)
