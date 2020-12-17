@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
@@ -13,6 +14,18 @@ public:
         }
         for(auto i:umap){
             if(i.second==0) res = i.first;
+        }
+        return res;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int res=nums.at(0);
+        for(int i=1; i<nums.size();i++){
+            res^=nums.at(i);
         }
         return res;
     }
