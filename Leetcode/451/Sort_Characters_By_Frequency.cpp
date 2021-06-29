@@ -34,3 +34,25 @@ public:
         return s;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char, int> umap;
+        for(auto&i:s) umap[i]++;
+        
+        auto cmp=[](pair<char, int> a, pair<char, int> b){
+            return a.second<b.second;
+        };
+        priority_queue<pair<char, int>, vector<pair<char, int>>, decltype(cmp)> pq(cmp);
+        
+        for(auto&i:umap) pq.push({i.first, i.second});
+        string res="";
+        while(!pq.empty()){
+            for(int i=0;i<pq.top().second;i++) res+=pq.top().first;
+            pq.pop();
+        }
+        return res;
+    }
+};

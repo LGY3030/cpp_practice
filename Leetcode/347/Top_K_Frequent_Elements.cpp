@@ -1,3 +1,4 @@
+//Solution 1
 struct twonum{
     int first;
     int second;
@@ -25,6 +26,52 @@ public:
         
         vector<int> res;
         for(int i=0;i<k;i++) res.push_back(vec[i].first);
+        return res;
+    }
+};
+
+
+//Solution 2
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> umap;
+        for(auto&i:nums) umap[i]++;
+        
+        auto cmp=[](pair<int, int> a, pair<int, int> b){ return a.second<b.second; };
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);
+        
+        for(auto&i:umap) pq.push({i.first, i.second});
+        
+        vector<int> res;
+        for(int i=0;i<k;i++){
+            res.push_back(pq.top().first);
+            pq.pop();
+        }
+        return res;
+    }
+};
+
+//Solution 3
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> umap;
+        for(auto&i:nums) umap[i]++;
+        
+        auto cmp=[](pair<int, int> a, pair<int, int> b){ return a.second>b.second; };
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);
+        
+        for(auto&i:umap){
+            pq.push({i.first, i.second});
+            if(pq.size()>k) pq.pop();
+        }
+        
+        vector<int> res;
+        while(!pq.empty()){
+            res.push_back(pq.top().first);
+            pq.pop();
+        }
         return res;
     }
 };

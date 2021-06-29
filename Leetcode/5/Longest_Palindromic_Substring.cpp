@@ -68,3 +68,27 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        vector<vector<bool>> vec(s.length(), vector<bool>(s.length(), false));
+        for(int i=0; i<s.length(); i++){
+            vec[i][i] = true;
+        }
+        string res="";
+        res+=s[0];
+        for(int i=s.length()-2; i>=0; i--){
+            for(int j=i+1; j<s.length(); j++){
+                if(j==i+1 || vec[i+1][j-1]){
+                    if(s[i] == s[j]){
+                        vec[i][j]=true;
+                        if(j-i+1>res.length()) res=s.substr(i, j-i+1);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+};
