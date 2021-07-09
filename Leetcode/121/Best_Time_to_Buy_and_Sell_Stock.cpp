@@ -28,3 +28,26 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int res=0;
+        stack<pair<int, int>> sta;
+        for(int i=0; i< prices.size(); i++){
+            if(sta.empty()) sta.push({prices[i], 0});
+            else{
+                while(!sta.empty() && sta.top().first>prices[i]){
+                    sta.pop();
+                }
+                if(sta.empty()) sta.push({prices[i], 0});
+                else{
+                    res=max(res, prices[i]-sta.top().first+sta.top().second);
+                    sta.push({prices[i], prices[i]-sta.top().first+sta.top().second});
+                }
+            }
+        }
+        return res;
+    }
+};

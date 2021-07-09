@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
@@ -15,6 +16,26 @@ public:
                 res=min(res, fast-slow);
                 sum-=nums[slow];
                 slow++;
+            }
+        }
+        if(res==nums.size()+1) return 0;
+        return res;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int start=0;
+        int end=0;
+        int res=nums.size()+1;
+        int sum=0;
+        while(end<nums.size()){
+            sum+=nums[end++];
+            while(sum>=target){
+                res=min(res, end-start);
+                sum-=nums[start++];
             }
         }
         if(res==nums.size()+1) return 0;
