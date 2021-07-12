@@ -75,3 +75,31 @@ public:
         return res;
     }
 };
+
+//Solution 4
+class Solution {
+private:
+    struct cmp{
+        bool operator()(pair<int, int> a, pair<int, int> b){
+            return a.second>b.second;
+        }  
+    };
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+        unordered_map<int, int> umap;
+        for(auto&i: nums){
+            umap[i]++;
+        }
+        for(auto&i: umap){
+            pq.push(i);
+            if(pq.size()>k) pq.pop();
+        }
+        vector<int> res;
+        while(!pq.empty()){
+            res.push_back(pq.top().first);
+            pq.pop();
+        }
+        return res;
+    }
+};

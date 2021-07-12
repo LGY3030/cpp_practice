@@ -34,3 +34,16 @@ public:
         return end;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        for(int i=0; i<nums.size(); i++){
+            int temp=abs(nums[i])-1;
+            nums[temp]*=-1;
+            if(nums[temp]>0) return abs(nums[i]);
+        }
+        return -1;
+    }
+};

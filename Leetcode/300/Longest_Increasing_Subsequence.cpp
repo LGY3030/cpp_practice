@@ -103,3 +103,17 @@ public:
 		return current.size();
     }
 };
+
+//Solution 5
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> count;
+        for(int i=0; i<nums.size(); i++){
+            auto it=lower_bound(count.begin(), count.end(), nums[i]);
+            if(it==count.end()) count.push_back(nums[i]);
+            else *it=nums[i];
+        }
+        return count.size();
+    }
+};

@@ -27,3 +27,22 @@ public:
         return pq.top();
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    struct cmp{
+      bool operator()(int a, int b){
+          return a>b;
+      }  
+    };
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int, vector<int>, cmp> pq;
+        for(auto&i:nums){
+            pq.push(i);
+            if(pq.size()>k) pq.pop();
+        }
+        return pq.top();
+    }
+};
