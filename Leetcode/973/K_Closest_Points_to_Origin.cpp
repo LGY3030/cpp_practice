@@ -41,3 +41,30 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    struct cmp{
+        bool operator()(pair<int, int> a, pair<int, int> b){
+            return a.first*a.first+a.second*a.second<b.first*b.first+b.second*b.second;
+        }  
+    };
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int &k) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+        vector<vector<int>> res;
+        for(auto&i:points){
+            if(pq.size()<k) pq.push({i[0], i[1]});
+            else if(pq.top().first*pq.top().first+pq.top().second*pq.top().second>i[0]*i[0]+i[1]*i[1]){
+                pq.push({i[0], i[1]});
+                pq.pop();
+            }
+        }
+        while(!pq.empty()){
+            res.push_back({pq.top().first, pq.top().second});
+            pq.pop();
+        }
+        return res;
+    }
+};

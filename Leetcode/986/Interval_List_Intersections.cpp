@@ -68,3 +68,24 @@ public:
         return res;
     }
 };
+
+//Solution 4
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+        vector<vector<int>> res;
+        int n=0;
+        int m=0;
+        while(n<firstList.size() && m<secondList.size()){
+            if(firstList[n][0]<secondList[m][0]){
+                if(secondList[m][0]<=firstList[n][1]) res.push_back({secondList[m][0], min(firstList[n][1], secondList[m][1])});
+            }
+            else{
+                if(secondList[m][1]>=firstList[n][0]) res.push_back({firstList[n][0], min(firstList[n][1], secondList[m][1])});
+            }
+            if(firstList[n][1]>secondList[m][1]) m++;
+            else n++;
+        }
+        return res;
+    }
+};

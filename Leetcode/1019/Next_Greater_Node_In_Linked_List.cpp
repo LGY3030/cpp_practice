@@ -130,3 +130,32 @@ public:
     }
 };
 
+//Solution 5
+class Solution {
+public:
+    vector<int> nextLargerNodes(ListNode* head) {
+        int size=0;
+        ListNode* cur=head;
+        while(cur){
+            size++;
+            cur=cur->next;
+        }
+        vector<int> res(size);
+        
+        cur=head;
+        stack<pair<int, int>> sta;
+        int idx=-1;
+        while(cur){
+            idx++;
+            while(!sta.empty() && cur->val>sta.top().first){
+                res[sta.top().second]=cur->val;
+                sta.pop();
+            }
+            sta.push({cur->val, idx});
+            cur=cur->next;
+        }
+        
+        
+        return res;
+    }
+};

@@ -40,3 +40,30 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        vector<string> res;
+        unordered_map<char, int> umap;
+        int count=1;
+        for(int i=0; i<pattern.size(); i++){
+            if(umap.find(pattern[i])==umap.end()) umap[pattern[i]]=count++;
+            pattern[i]=umap[pattern[i]];
+        }
+        for(auto&word:words){
+            string i=word;
+            if(i.size()!=pattern.size()) continue;
+            umap={};
+            count=1;
+            for(int j=0; j<i.size(); j++){
+                if(umap.find(i[j])==umap.end()) umap[i[j]]=count++;
+                i[j]=umap[i[j]];
+                if(i[j]!=pattern[j]) break;
+            }
+            if(i==pattern) res.push_back(word);
+        }
+        return res;
+    }
+};

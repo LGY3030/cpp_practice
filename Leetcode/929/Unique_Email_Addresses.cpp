@@ -51,3 +51,30 @@ public:
         return res.size();
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int numUniqueEmails(vector<string>& emails) {
+        unordered_set<string> uset;
+        for(auto&email:emails){
+            string temp="";
+            bool plus=false;
+            for(int i=0; i<email.size(); i++){
+                if(email[i]=='@'){
+                    temp+=email.substr(i);
+                    break;
+                }
+                if(email[i]=='+'){
+                    plus=true;
+                    continue;
+                }
+                if(!plus && email[i]!='.'){
+                    temp+=email[i];
+                }
+            }
+            uset.insert(temp);
+        }
+        return uset.size();
+    }
+};
