@@ -66,3 +66,19 @@ public:
         return res;
     }
 };
+
+//Solution 4
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> umap;
+        int res=0;
+        int slow=0;
+        for(int i=0; i<s.length(); i++){
+            if(umap.find(s[i])!=umap.end() && umap[s[i]]>=slow) slow=umap[s[i]]+1;
+            umap[s[i]]=i;
+            res=max(res, i-slow+1);
+        }
+        return res;
+    }
+};

@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     string convert(string s, int numRows) {
@@ -12,6 +13,22 @@ public:
             vec[tmp]+=s[i];
         }
         for(auto&i:vec) res+=i;
+        return res;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows==1) return s;
+        int count=2*numRows-2;
+        string res="";
+        for(int j=0; j<numRows; j++){
+            for(int i=0; i<s.length(); i++){
+                if(i%count==j || i%count==count-j) res+=s[i];
+            }
+        }
         return res;
     }
 };

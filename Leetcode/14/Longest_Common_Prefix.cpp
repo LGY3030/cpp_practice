@@ -40,3 +40,19 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        sort(strs.begin(), strs.end());
+        string start=strs[0];
+        string end=strs[strs.size()-1];
+        int count=0;
+        for(int i=0; i<start.length(); i++){
+            if(start[i]==end[i]) count++;
+            else break;
+        }
+        return start.substr(0, count);
+    }
+};

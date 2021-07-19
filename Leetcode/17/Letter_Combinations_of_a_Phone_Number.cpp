@@ -82,3 +82,25 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    vector<string> number={"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    void bk(vector<string>& res, string& digits, int idx, string str){
+        if(idx==digits.length()){
+            res.push_back(str);
+            return;
+        }
+        for(int i=0; i<number[digits[idx]-'0'-2].length(); i++){
+            bk(res, digits, idx+1, str+number[digits[idx]-'0'-2][i]);
+        }
+    }
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()==0) return {};
+        vector<string> res;
+        bk(res, digits, 0, "");
+        return res;
+    }
+};
