@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     bool wordPattern(string pattern, string s) {
@@ -22,5 +23,49 @@ public:
             }
         }
         return true;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        string pattern_simple="";
+        unordered_map<char, int> umap;
+        int count=0;
+        for(auto&i:pattern){
+            if(umap.find(i)==umap.end()){ 
+                umap[i]=count;
+                count++;
+            }
+            pattern_simple+=(umap[i]+'a');
+        }
+        unordered_map<string, int> umap2;
+        string pattern_s="";
+        count=0;
+        string temp="";
+        for(int i=0; i<s.length(); i++){
+            if(s[i]==' '){
+                if(temp.length()>0){
+                    if(umap2.find(temp)==umap2.end()){
+                        umap2[temp]=count;
+                        count++;
+                    }
+                    pattern_s+=(umap2[temp]+'a');
+                }
+                temp="";
+            }
+            else{
+                temp+=s[i];
+            }
+        }
+        if(temp.length()>0){
+            if(umap2.find(temp)==umap2.end()){
+                umap2[temp]=count;
+                count++;
+            }
+            pattern_s+=(umap2[temp]+'a');
+        }
+        return pattern_s==pattern_simple;
     }
 };

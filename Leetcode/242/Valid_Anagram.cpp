@@ -18,6 +18,45 @@ public:
     }
 };
 
-//Solution 2, use array to simulate hash table
+//Solution 2
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        return s==t;
+    }
+};
 
-//Solution 3, use sort and check if two string are equal
+//Solution 3
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char, int> umap;
+        for(auto&i:s) umap[i]++;
+        int count=0;
+        for(auto&i:t){
+            if(umap.find(i)==umap.end()) return false;
+            else if(umap[i]==0) return false;
+            else umap[i]--;
+            count++;
+        }
+        if(count!=s.length()) return false;
+        return true;
+    }
+};
+
+//Solution 4
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char, int> umap;
+        for(auto&i:s) umap[i]++;
+        for(auto&i:t){
+            if(umap.find(i)==umap.end()) return false;
+            else if(umap[i]==0) return false;
+            else umap[i]--;
+        }
+        return true;
+    }
+};
