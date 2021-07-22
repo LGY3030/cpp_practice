@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     int characterReplacement(string s, int k) {
@@ -19,5 +20,21 @@ public:
             res=max(res, i-start+1);
         }
         return res;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int same=0;
+        int start=0;
+        int end=0;
+        vector<int> vec(26);
+        while(end<s.length()){
+            same=max(same, ++vec[s[end++]-'A']);
+            if(end-start-same>k) --vec[s[start++]-'A'];
+        }
+        return end-start;
     }
 };

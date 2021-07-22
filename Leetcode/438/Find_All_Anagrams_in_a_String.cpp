@@ -1,4 +1,20 @@
-//Solution 1
+//Solution 1, Time Exceeded
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        if(s.length()<p.length()) return {};
+        vector<int> res;
+        sort(p.begin(), p.end());
+        for(int i=0; i<=s.length()-p.length(); i++){
+            string temp=s.substr(i, p.length());
+            sort(temp.begin(), temp.end());
+            if(temp==p) res.push_back(i);
+        }
+        return res;
+    }
+};
+
+//Solution 2
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
@@ -26,7 +42,7 @@ public:
 };
 
 
-//Solution 2, Concise
+//Solution 3, Concise
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
