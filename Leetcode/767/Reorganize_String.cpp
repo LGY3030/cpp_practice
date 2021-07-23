@@ -51,3 +51,32 @@ public:
         return S;
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    struct cmp{
+        bool operator()(pair<char, int> a, pair<char, int> b){
+            return a.second<b.second;
+        }  
+    };
+public:
+    string reorganizeString(string s) {
+        priority_queue<pair<char, int>, vector<pair<char, int>>, cmp> pq;
+        unordered_map<char, int> umap;
+        for(auto&i:s) umap[i]++;
+        for(auto&i:umap) pq.push(i);
+        if(pq.top().second>(s.length()+1)/2) return "";
+        string res=s;
+        int idx=0;
+        while(!pq.empty()){
+            for(int i=0; i<pq.top().second; i++){
+                res[idx]=pq.top().first;
+                idx+=2;
+                if(idx>=s.length()) idx=1;
+            }
+            pq.pop();
+        }
+        return res;
+    }
+};

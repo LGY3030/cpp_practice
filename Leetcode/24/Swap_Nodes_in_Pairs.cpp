@@ -8,6 +8,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//Solution 1
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
@@ -37,5 +38,31 @@ public:
             pos=pos->next->next;
         }
         return head;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* res=head->next;
+        ListNode* dummy=new ListNode();
+        dummy->next=head;
+        ListNode* slow=head;
+        ListNode* fast=head->next;
+        while(true){
+            dummy->next=fast;
+            slow->next=fast->next;
+            fast->next=slow;
+            ListNode* temp=slow;
+            slow=fast;
+            fast=temp;
+            if(fast->next==nullptr || fast->next->next==nullptr) break;
+            fast=fast->next->next;
+            slow=slow->next->next;
+            dummy=dummy->next->next;
+        }
+        return res;
     }
 };
