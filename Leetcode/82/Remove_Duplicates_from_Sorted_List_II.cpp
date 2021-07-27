@@ -79,3 +79,50 @@ public:
         return head;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* dummy = new ListNode(0);
+        ListNode* res=dummy;
+        int count=-101;
+        while(head->next!=nullptr){
+            if(head->val!=count && head->val!=head->next->val){
+                dummy->next=head;
+                dummy=dummy->next;
+            }
+            count=head->val;
+            head=head->next;
+        }
+        if(head->val!=count){
+            dummy->next=head;
+            dummy=dummy->next;
+        }
+        dummy->next=nullptr;
+        return res->next;
+    }
+};
+
+//Solution 4
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* dummy = new ListNode(0);
+        ListNode* res=dummy;
+        while(head){
+            if(head->next && head->val==head->next->val){
+                while(head->next && head->val==head->next->val) head=head->next;
+            }
+            else{
+                dummy->next=head;
+                dummy=dummy->next;
+            }
+            head=head->next;
+        }
+        dummy->next=nullptr;
+        return res->next;
+    }
+};

@@ -37,3 +37,20 @@ public:
         return first;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* tmpa=headA;
+        ListNode* tmpb=headB;
+        while(tmpa || tmpb){
+            if(tmpa==nullptr) tmpa=headB;
+            if(tmpb==nullptr) tmpb=headA;
+            if(tmpa==tmpb) return tmpa;
+            tmpa=tmpa->next;
+            tmpb=tmpb->next;
+        }
+        return nullptr;
+    }
+};

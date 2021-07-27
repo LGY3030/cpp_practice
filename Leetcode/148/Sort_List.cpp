@@ -96,3 +96,39 @@ public:
         
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    ListNode* merge(ListNode* l1, ListNode* l2){
+        ListNode* res=new ListNode(0);
+        ListNode* cur=res;
+        while(l1 && l2){
+            if(l1->val>l2->val){
+                res->next=l2;
+                l2=l2->next;
+            }
+            else{
+                res->next=l1;
+                l1=l1->next;
+            }
+            res=res->next;
+        }
+        if(l1) res->next=l1;
+        if(l2) res->next=l2;
+        return cur->next;
+    }
+public:
+    ListNode* sortList(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* fast=head->next;
+        ListNode* slow=head;
+        while(fast && fast->next){
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+        fast=slow->next;
+        slow->next=nullptr;
+        return merge(sortList(fast), sortList(head));
+    }
+};

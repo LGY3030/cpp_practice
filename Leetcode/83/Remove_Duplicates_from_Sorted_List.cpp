@@ -49,3 +49,21 @@ public:
         return head;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* dummy=new ListNode(0);
+        ListNode* res=dummy;
+        while(head){
+            while(head->next && head->val==head->next->val) head=head->next;
+            dummy->next=head;
+            dummy=dummy->next;
+            head=head->next;
+        }
+        dummy->next=nullptr;
+        return res->next;
+    }
+};
