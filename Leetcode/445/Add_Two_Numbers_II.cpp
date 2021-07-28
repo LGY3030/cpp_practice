@@ -118,3 +118,44 @@ public:
         return head;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* tmp=new ListNode(0);
+        ListNode* res=tmp;
+        stack<int> sta;
+        stack<int> for1;
+        stack<int> for2;
+        while(l1){
+            for1.push(l1->val);
+            l1=l1->next;
+        }
+        while(l2){
+            for2.push(l2->val);
+            l2=l2->next;
+        }
+        int carry=0;
+        while(!for1.empty() || !for2.empty() || carry){
+            int count=carry;
+            if(!for1.empty()){
+                count+=for1.top();
+                for1.pop();
+            }
+            if(!for2.empty()){
+                count+=for2.top();
+                for2.pop();
+            }
+            sta.push(count%10);
+            carry=count/10;
+        }
+        while(!sta.empty()){
+            ListNode* add=new ListNode(sta.top());
+            sta.pop();
+            tmp->next=add;
+            tmp=tmp->next;
+        }
+        return res->next;
+    }
+};

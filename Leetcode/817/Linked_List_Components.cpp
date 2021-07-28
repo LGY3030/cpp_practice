@@ -63,3 +63,25 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int numComponents(ListNode* head, vector<int>& nums) {
+        unordered_set<int> uset;
+        for(auto&i:nums) uset.insert(i);
+        int res=0;
+        bool flag=false;
+        while(head){
+            if(uset.count(head->val)){
+                if(!flag){
+                    res++;
+                    flag=true;
+                }
+            }
+            else flag=false;
+            head=head->next;
+        }
+        return res;
+    }
+};

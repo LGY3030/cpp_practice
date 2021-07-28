@@ -52,3 +52,32 @@ public:
         return head;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if(head==nullptr || head->next==nullptr) return head;
+        ListNode* odd=new ListNode(0);
+        ListNode* resodd=odd;
+        ListNode* even=new ListNode(0);
+        ListNode* reseven=even;
+        bool count=true;
+        while(head){
+            if(count){
+                odd->next=head;
+                odd=odd->next;
+                count=false;
+            }
+            else{
+                even->next=head;
+                even=even->next;
+                count=true;
+            }
+            head=head->next;
+        }
+        odd->next=reseven->next;
+        even->next=nullptr;
+        return resodd->next;
+    }
+};

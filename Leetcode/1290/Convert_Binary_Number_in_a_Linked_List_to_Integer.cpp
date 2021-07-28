@@ -43,3 +43,22 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        queue<int> que;
+        while(head){
+            que.push(head->val);
+            head=head->next;
+        }
+        int res=0;
+        while(!que.empty()){
+            int temp=que.front()<<(que.size()-1);
+            res|=temp;
+            que.pop();
+        }
+        return res;
+    }
+};

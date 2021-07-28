@@ -51,6 +51,23 @@ public:
     }
 };
 
+//Solution 3
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* dummy=new ListNode(0);
+        ListNode* res=dummy;
+        while(head){
+            if(head->val!=val){
+                dummy->next=head;
+                dummy=dummy->next;
+            }
+            head=head->next;
+        }
+        dummy->next=nullptr;
+        return res->next;
+    }
+};
 
 //Solution 3
 class Solution {
