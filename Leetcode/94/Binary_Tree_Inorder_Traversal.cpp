@@ -47,6 +47,3 @@ public:
         return vec;
     }
 };
-
-
-//Solution3, morris

@@ -103,3 +103,26 @@ public:
     }
 };
 
+//Solution 5
+class Solution {
+private:
+    int maxDepth(TreeNode* root){
+        if(root==nullptr) return 0;
+        return 1+max(maxDepth(root->left), maxDepth(root->right));
+    }
+public:
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        if(root==nullptr) return {};
+        vector<vector<int>> res(maxDepth(root));
+        queue<pair<TreeNode*, int>> que;
+        que.push({root, 1});
+        while(!que.empty()){
+            auto temp=que.front();
+            que.pop();
+            res[res.size()-temp.second].push_back(temp.first->val);
+            if(temp.first->left) que.push({temp.first->left, temp.second+1});
+            if(temp.first->right) que.push({temp.first->right, temp.second+1});
+        }
+        return res;
+    }
+};

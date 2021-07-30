@@ -63,3 +63,42 @@ public:
         return vec;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(root==nullptr) return {};
+        queue<pair<TreeNode*, int>> que;
+        vector<vector<int>> res;
+        que.push({root, 1});
+        while(!que.empty()){
+            auto temp=que.front();
+            que.pop();
+            if(temp.second>res.size()) res.push_back({});
+            res[temp.second-1].push_back(temp.first->val);
+            if(temp.first->left) que.push({temp.first->left, temp.second+1});
+            if(temp.first->right) que.push({temp.first->right, temp.second+1});
+        }
+        return res;
+    }
+};
+
+//Solution 4
+class Solution {
+private:
+    void tra(TreeNode* root, vector<vector<int>>& res, int count){
+        if(root){
+            if(res.size()<count) res.push_back({});
+            tra(root->left, res, count+1);
+            res[count-1].push_back(root->val);
+            tra(root->right, res, count+1);
+        }
+    }
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        tra(root, res, 1);
+        return res;
+    }
+};

@@ -63,3 +63,24 @@ public:
         return vec;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        if(root==nullptr) return {};
+        queue<pair<TreeNode*, int>> que;
+        vector<vector<int>> res;
+        que.push({root, 1});
+        while(!que.empty()){
+            auto temp=que.front();
+            que.pop();
+            if(temp.second>res.size()) res.push_back({});
+            if(temp.second%2) res[temp.second-1].push_back(temp.first->val);
+            else res[temp.second-1].insert(res[temp.second-1].begin(), temp.first->val);
+            if(temp.first->left) que.push({temp.first->left, temp.second+1});
+            if(temp.first->right) que.push({temp.first->right, temp.second+1});
+        }
+        return res;
+    }
+};
