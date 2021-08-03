@@ -45,3 +45,23 @@ public:
         return getvector(root, 0);
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    void bk(TreeNode* root, int& res, int current){
+        if(root->left==nullptr && root->right==nullptr){
+            res+=(current+root->val);
+            return;
+        }
+        if(root->left) bk(root->left, res, (current+root->val)*10);
+        if(root->right) bk(root->right, res, (current+root->val)*10);
+    }
+public:
+    int sumNumbers(TreeNode* root) {
+        if(root==nullptr) return 0;
+        int res=0;
+        bk(root, res, 0);
+        return res;
+    }
+};
