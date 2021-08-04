@@ -9,6 +9,7 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+//Solution 1
 class Solution {
 public:
     TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
@@ -18,5 +19,19 @@ public:
         t1->left= mergeTrees(t1->left, t2->left);
         t1->right= mergeTrees(t1->right, t2->right);
         return t1;
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if(!root1 && !root2) return nullptr;
+        if(!root1) return root2;
+        if(!root2) return root1;
+        TreeNode* root=new TreeNode(root1->val+root2->val);
+        root->left=mergeTrees(root1->left, root2->left);
+        root->right=mergeTrees(root1->right, root2->right);
+        return root;
     }
 };

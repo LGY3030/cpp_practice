@@ -38,3 +38,25 @@ public:
         return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(root==nullptr) return 0;
+        int res=0;
+        queue<TreeNode*> que;
+        que.push(root);
+        while(!que.empty()){
+            int size=que.size();
+            for(int i=0; i<size; i++){
+                TreeNode* temp=que.front();
+                que.pop();
+                if(temp->left) que.push(temp->left);
+                if(temp->right) que.push(temp->right);
+            }
+            res+=size;
+        }
+        return res;
+    }
+};
