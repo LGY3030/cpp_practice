@@ -1,3 +1,4 @@
+//Solution 1
 class Solution {
 public:
     int integerBreak(int n) {
@@ -15,5 +16,24 @@ public:
             max[i]=maxrow;
         }
         return max[n];
+    }
+};
+
+//Solution 2
+class Solution {
+public:
+    int integerBreak(int n) {
+        vector<int> vec(n+1, INT_MIN);
+        vec[1]=1;
+        for(int i=2; i<=n; i++){
+            for(int j=0; j<=i/2; j++){
+                if(j==0){
+                    if(i==n) continue;
+                    vec[i]=max(vec[i], i);
+                }
+                else vec[i]=max(vec[i], vec[j]*vec[i-j]);
+            }
+        }
+        return vec[n];
     }
 };
