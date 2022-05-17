@@ -55,3 +55,21 @@ public:
         return -1;
     }
 };
+
+//Solution 4
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char, vector<int>> umap;
+        for(int i = 0; i < s.length(); i++){
+            umap[s[i]].push_back(i);
+        }
+        int res = INT_MAX;
+        for(auto each: umap){
+            if(each.second.size() == 1){
+                res = min(res, each.second[0]);
+            }
+        }
+        return res == INT_MAX? -1:res;
+    }
+};

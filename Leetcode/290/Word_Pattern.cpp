@@ -69,3 +69,38 @@ public:
         return pattern_s==pattern_simple;
     }
 };
+
+//Solution 3
+class Solution {
+private:
+    void getWord(vector<string> & vec, string & s){
+        string temp = "";
+        for(int i = 0; i < s.length(); i++){
+            if(s[i] == ' '){
+                vec.push_back(temp);
+                temp = "";
+            }
+            else temp += s[i];
+        }
+        vec.push_back(temp);
+    }
+public:
+    bool wordPattern(string pattern, string s) {
+        vector<string> vec;
+        getWord(vec, s);
+        if(pattern.length() != vec.size()) return false;
+        unordered_map<char, string> umap;
+        for(int i = 0; i < pattern.length(); i++){
+            if(umap.find(pattern[i]) != umap.end()){
+                if(umap[pattern[i]] != vec[i]) return false;
+            }
+            else{
+                for(auto each: umap){
+                    if(each.second == vec[i]) return false;
+                }
+                umap[pattern[i]] = vec[i];
+            }
+        }
+        return true;
+    }
+};

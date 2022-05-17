@@ -28,3 +28,22 @@ public:
         return res;
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int flag = -1;
+        for(int i = 0; i < nums.size(); i++){
+            if(abs(nums[i]) < nums.size()){
+                if(nums[abs(nums[i])] == 0) flag = abs(nums[i]);
+                nums[abs(nums[i])] = -nums[abs(nums[i])];
+            }
+        }
+        for(int i = 0; i < nums.size(); i++){
+            if(flag == i) continue;
+            if(nums[i] > 0 || (flag == -1 && nums[i] == 0)) return i;
+        }
+        return nums.size();
+    }
+};
