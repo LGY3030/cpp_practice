@@ -78,3 +78,30 @@ public:
         return uset.size();
     }
 };
+
+//Solution 4
+class Solution {
+private:
+    string getStr(string email){
+        bool atflag = false;
+        bool plusflag = false;
+        string str = "";
+        for(auto i: email){
+            if(i == '@') atflag = true;
+            if(i == '+') plusflag = true;
+            if(!atflag && i == '.') continue;
+            if(plusflag && !atflag) continue;
+            str += i;
+        }
+        return str;
+    }
+public:
+    int numUniqueEmails(vector<string>& emails) {
+        unordered_set<string> uset;
+        for(auto s: emails){
+            uset.insert(getStr(s));
+        }
+        return uset.size();
+        
+    }
+};
