@@ -46,3 +46,15 @@ public:
         return pq.top();
     }
 };
+
+//Solution 4
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        auto cmp = [](int a, int b){
+            return a > b;
+        };
+        sort(nums.begin(), nums.end(), cmp);
+        return nums[k-1];
+    }
+};

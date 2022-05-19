@@ -72,3 +72,30 @@ public:
         return res;
     }
 };
+
+//Solution 4
+class Solution {
+private:
+    struct cmp{
+        bool operator()(pair<int, int>& a, pair<int, int>& b){
+            return a.first + a.second < b.first + b.second;
+        }
+    };
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+        for(auto i: nums1){
+            for(auto j: nums2){
+                if(pq.size() == k && i + j > pq.top().first + pq.top().second) break;
+                pq.push({i, j});
+                if(pq.size() > k) pq.pop();
+            }
+        }
+        vector<vector<int>> res;
+        while(!pq.empty()){
+            res.push_back({pq.top().first, pq.top().second});
+            pq.pop();
+        }
+        return res;
+    }
+};
