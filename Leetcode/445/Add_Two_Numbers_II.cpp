@@ -159,3 +159,49 @@ public:
         return res->next;
     }
 };
+
+//Solution 4
+class Solution {
+private:
+    ListNode* revList(ListNode * l){
+        ListNode * pre = nullptr;
+        ListNode * cur = l;
+        while(cur){
+            ListNode * pos = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = pos;
+        }
+        return pre;
+    }
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        l1 = revList(l1);
+        l2 = revList(l2);
+        ListNode * head = new ListNode(0);
+        ListNode * cur = head;
+        int carry = 0;
+        while(l1 || l2){
+            int sum = 0;
+            if(l1){
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if(l2){
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            sum += carry;
+            carry = sum / 10;
+            ListNode * newNode = new ListNode(sum % 10);
+            cur->next = newNode;
+            cur = cur->next;
+        }
+        if(carry){
+            ListNode * newNode = new ListNode(1);
+            cur->next = newNode;
+            cur = cur->next;
+        }
+        return revList(head->next);
+    }
+};
