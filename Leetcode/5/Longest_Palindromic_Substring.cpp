@@ -92,3 +92,28 @@ public:
         return res;
     }
 };
+
+//Solution 4
+class Solution {
+private:
+    string getSub(string & s, int start, int end){
+        while(s[start] == s[end] && start > 0 && end < s.length() - 1){
+            start--;
+            end++;
+        }
+        if(s[start] != s[end]) return s.substr(start + 1, end - start - 1);
+        return s.substr(start, end - start + 1);
+    }
+public:
+    string longestPalindrome(string s) {
+        string res = "";
+        for(int i = 0; i < s.length() * 2 - 1; i++){
+            string tmp = "";
+            if(i % 2) tmp = getSub(s, i / 2, i / 2 + 1);
+            else tmp = getSub(s, i / 2, i / 2);
+            
+            if(tmp.length() > res.length()) res = tmp;
+        }
+        return res;
+    }
+};
