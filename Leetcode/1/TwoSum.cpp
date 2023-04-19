@@ -16,8 +16,23 @@ class Solution {
 	    }
 };
 
-
 //Solution 2
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for(int i = 0; i < nums.size() - 1; i++){
+            for(int j = i + 1; j < nums.size(); j++){
+                if(nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        return {};
+    }
+};
+
+
+//Solution 3
 class Solution {
 	public:
 	    vector<int> twoSum(vector<int>& nums, int target) {
@@ -33,4 +48,19 @@ class Solution {
 	        }
 	        return res;
 	    }
+};
+
+//Solution 4
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> umap;
+        for(int i = 0; i < nums.size(); i++){
+            if(umap.find(nums[i]) != umap.end()){
+                return {umap[nums[i]], i};
+            }
+            umap[target - nums[i]] = i;
+        }
+        return {};
+    }
 };
