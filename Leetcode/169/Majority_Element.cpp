@@ -28,3 +28,23 @@ public:
         return nums[nums.size()/2];
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int, int> umap;
+        for(auto i: nums){
+            umap[i]++;
+        }
+        int result = nums[0];
+        int count = umap[result];
+        for(auto i: umap){
+            if(i.second > count){
+                result = i.first;
+                count = i.second;
+            }
+        }
+        return result;
+    }
+};

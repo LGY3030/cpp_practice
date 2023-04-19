@@ -21,8 +21,24 @@ public:
     }
 };
 
+//Solution 2
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_set<ListNode *> uset;
+        while(head){
+            if(uset.count(head)){
+                return true;
+            }
+            uset.insert(head);
+            head = head->next;
+        }
+        return false;
+    }
+};
 
-//Solution 2, double pointers
+
+//Solution 3, double pointers
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
