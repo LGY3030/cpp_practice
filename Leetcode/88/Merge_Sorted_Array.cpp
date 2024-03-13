@@ -53,3 +53,44 @@ public:
         }
     }
 };
+
+//Solution 3
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        for(int i = m; i < m + n; i++){
+            nums1[i] = nums2[i - m];
+        }
+        sort(nums1.begin(), nums1.end());
+    }
+};
+
+//Solution 4
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        vector<int> vec(m, 0);
+        for(int i = 0; i < m ; i++){
+            vec[i] = nums1[i];
+        }
+        int first = 0;
+        int second = 0;
+        int idx = 0;
+        for(int i = 0; i < m + n; i++){
+            if(first >= m || second >= n) break;
+            if(vec[first] < nums2[second]){
+                nums1[i] = vec[first++];
+            }
+            else{
+                nums1[i] = nums2[second++];
+            }
+            idx++;
+        }
+        while(first < m){
+            nums1[idx++] = vec[first++];
+        }
+        while(second < n){
+            nums1[idx++] = nums2[second++];
+        }
+    }
+};
